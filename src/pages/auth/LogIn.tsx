@@ -1,8 +1,57 @@
-import { Avatar, Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useState } from "react";
+import { axiosHttp } from "../../services/instance";
+import { toast } from "react-hot-toast";
+
+type Inputs = {
+  identifier: string;
+  password: string;
+  form: string;
+};
 
 const LogIn = ({ changeTab }: { changeTab: Function }) => {
+  const {
+    control,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const login = async (data: Inputs) => {
+    await axiosHttp
+      .post("api/auth/local", data)
+      .then((res) => {
+        console.log(res);
+        let user: { username: string; email: string; jwt: string } = {
+          username: res.data.user.username,
+          email: res.data.user.email,
+          jwt: res.data.jwt,
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error?.response?.data?.error?.message) {
+          setError("form", { message: error?.response?.data?.error?.message });
+        } else {
+          toast.error("Something went wrong please try again later!");
+        }
+      });
+  };
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    clearErrors();
+    login(data);
+  };
+
   return (
     <>
       <Box
@@ -23,30 +72,79 @@ const LogIn = ({ changeTab }: { changeTab: Function }) => {
         </Typography>
         <Box
           component="form"
-          onSubmit={() => {}}
+          onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}
         >
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+          <Controller
+            name="identifier"
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange } }) => (
+              <TextField
+                margin="normal"
+                fullWidth
+                id="email"
+                label="Email Address*"
+                name="email"
+                type="email"
+                autoComplete="email"
+                autoFocus
+                onChange={onChange}
+                error={errors.identifier ? true : false}
+                helperText={errors.identifier ? "This field is required" : ""}
+              />
+            )}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
+          <Controller
             name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange } }) => (
+              <FormControl
+                id="password"
+                margin="normal"
+                fullWidth
+                error={errors.password ? true : false}
+              >
+                <InputLabel htmlFor="outlined-adornment-password">Password*</InputLabel>
+                <OutlinedInput
+                  type={showPassword ? "text" : "password"}
+                  onChange={onChange}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword((show) => !show)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+                {errors.password && (
+                  <FormHelperText
+                    error
+                    id="accountId-error"
+                  >
+                    This field is required
+                  </FormHelperText>
+                )}
+              </FormControl>
+            )}
           />
+          <FormHelperText
+            error
+            id="accountId-error"
+          >
+            {errors.form?.message ? errors.form?.message : ""}
+          </FormHelperText>
           <FormControlLabel
             control={
               <Checkbox

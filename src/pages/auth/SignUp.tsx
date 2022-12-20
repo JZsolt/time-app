@@ -2,10 +2,9 @@ import { Avatar, Box, Button, FormControl, FormHelperText, IconButton, InputAdor
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { axiosHttp } from "../../services/instance";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-hot-toast";
-import { watch } from "fs";
 
 type Inputs = {
   username: string;
@@ -80,7 +79,7 @@ const SignUp = () => {
               render={({ field: { onChange } }) => (
                 <TextField
                   id="username"
-                  label="Username"
+                  label="Username*"
                   margin="normal"
                   fullWidth
                   autoFocus
@@ -100,7 +99,7 @@ const SignUp = () => {
               render={({ field: { onChange } }) => (
                 <TextField
                   id="email"
-                  label="Email Address"
+                  label="Email Address*"
                   type="email"
                   margin="normal"
                   fullWidth
@@ -124,7 +123,7 @@ const SignUp = () => {
                   fullWidth
                   error={errors.password ? true : false}
                 >
-                  <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                  <InputLabel htmlFor="outlined-adornment-password">Password*</InputLabel>
                   <OutlinedInput
                     type={showPassword ? "text" : "password"}
                     onChange={onChange}
