@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import AuthForms from "../pages/auth/AuthForms";
 import LogIn from "../pages/auth/LogIn";
 import Home from "../pages/Home";
 
@@ -11,7 +12,7 @@ const Router = () => {
       />
       <Route
         path="login"
-        element={<LogIn />}
+        element={<AuthForms />}
       />
     </Routes>
   );

@@ -2,12 +2,11 @@ import { Avatar, Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typog
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { NavLink } from "react-router-dom";
 
-const LogIn = () => {
+const LogIn = ({ changeTab }: { changeTab: Function }) => {
   return (
     <>
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -73,7 +72,12 @@ const LogIn = () => {
               <NavLink to="#">Forgot password?</NavLink>
             </Grid>
             <Grid item>
-              <NavLink to="#">{"Don't have an account? Sign Up"}</NavLink>
+              <Typography
+                sx={{ cursor: "pointer" }}
+                onClick={() => changeTab(1)}
+              >
+                Don't have an account? Sign Up
+              </Typography>
             </Grid>
           </Grid>
         </Box>
