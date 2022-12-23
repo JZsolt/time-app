@@ -1,4 +1,4 @@
-import { Tabs, Tab, Typography, Card, CardContent } from "@mui/material";
+import { Tabs, Tab, Card, CardContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { SyntheticEvent, useState } from "react";
 import LogIn from "./LogIn";

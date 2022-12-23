@@ -48,7 +48,6 @@ const LogIn = ({ changeTab }: { changeTab: Function }) => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    clearErrors();
     login(data);
   };
 

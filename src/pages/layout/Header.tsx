@@ -14,7 +14,7 @@ const Header = () => {
     { label: "Home", link: "" },
     { label: "Protected", link: "protected" },
   ];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Profile", "Account", "Dashboard"];
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -180,7 +180,12 @@ const Header = () => {
               </Menu>
             </Box>
           ) : (
-            <NavLink to="/login">LogIn</NavLink>
+            <NavLink
+              style={{ textDecoration: "none", color: "white" }}
+              to="/login"
+            >
+              LogIn
+            </NavLink>
           )}
         </Toolbar>
       </Container>

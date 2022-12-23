@@ -35,6 +35,7 @@ const SignUp = () => {
           jwt: res.data.jwt,
         };
         localStorage.setItem("user", JSON.stringify(user));
+        window.location.href = "/";
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +47,6 @@ const SignUp = () => {
       });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    clearErrors();
     register(data);
   };
 
