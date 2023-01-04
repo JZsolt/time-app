@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2022-12-20T13:57:57.595Z"
+    "x-generation-date": "2022-12-23T10:52:56.477Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -87,7 +87,7 @@
           }
         }
       },
-      "TestRequest": {
+      "MemberRequest": {
         "type": "object",
         "required": [
           "data"
@@ -97,14 +97,17 @@
             "required": [],
             "type": "object",
             "properties": {
-              "szoveg": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
                 "type": "string"
               }
             }
           }
         }
       },
-      "TestListResponseDataItem": {
+      "MemberListResponseDataItem": {
         "type": "object",
         "properties": {
           "id": {
@@ -113,7 +116,10 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "szoveg": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
                 "type": "string"
               },
               "createdAt": {
@@ -417,7 +423,7 @@
           }
         }
       },
-      "TestListResponseDataItemLocalized": {
+      "MemberListResponseDataItemLocalized": {
         "type": "object",
         "properties": {
           "id": {
@@ -426,7 +432,10 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "szoveg": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
                 "type": "string"
               },
               "createdAt": {
@@ -730,12 +739,12 @@
           }
         }
       },
-      "TestListResponse": {
+      "MemberListResponse": {
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TestListResponseDataItem"
+              "$ref": "#/components/schemas/MemberListResponseDataItem"
             }
           },
           "meta": {
@@ -763,7 +772,7 @@
           }
         }
       },
-      "TestResponseDataObject": {
+      "MemberResponseDataObject": {
         "type": "object",
         "properties": {
           "id": {
@@ -772,7 +781,10 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "szoveg": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
                 "type": "string"
               },
               "createdAt": {
@@ -1076,7 +1088,7 @@
           }
         }
       },
-      "TestResponseDataObjectLocalized": {
+      "MemberResponseDataObjectLocalized": {
         "type": "object",
         "properties": {
           "id": {
@@ -1085,7 +1097,10 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "szoveg": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
                 "type": "string"
               },
               "createdAt": {
@@ -1389,10 +1404,10 @@
           }
         }
       },
-      "TestResponse": {
+      "MemberResponse": {
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/TestResponseDataObject"
+            "$ref": "#/components/schemas/MemberResponseDataObject"
           },
           "meta": {
             "type": "object"
@@ -13878,7 +13893,7 @@
     }
   },
   "paths": {
-    "/tests": {
+    "/members": {
       "get": {
         "responses": {
           "200": {
@@ -13886,7 +13901,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestListResponse"
+                  "$ref": "#/components/schemas/MemberListResponse"
                 }
               }
             }
@@ -13943,7 +13958,7 @@
           }
         },
         "tags": [
-          "Test"
+          "Member"
         ],
         "parameters": [
           {
@@ -14048,7 +14063,7 @@
             }
           }
         ],
-        "operationId": "get/tests"
+        "operationId": "get/members"
       },
       "post": {
         "responses": {
@@ -14057,7 +14072,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestResponse"
+                  "$ref": "#/components/schemas/MemberResponse"
                 }
               }
             }
@@ -14114,23 +14129,23 @@
           }
         },
         "tags": [
-          "Test"
+          "Member"
         ],
         "parameters": [],
-        "operationId": "post/tests",
+        "operationId": "post/members",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestRequest"
+                "$ref": "#/components/schemas/MemberRequest"
               }
             }
           }
         }
       }
     },
-    "/tests/{id}": {
+    "/members/{id}": {
       "get": {
         "responses": {
           "200": {
@@ -14138,7 +14153,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestResponse"
+                  "$ref": "#/components/schemas/MemberResponse"
                 }
               }
             }
@@ -14195,7 +14210,7 @@
           }
         },
         "tags": [
-          "Test"
+          "Member"
         ],
         "parameters": [
           {
@@ -14209,7 +14224,7 @@
             }
           }
         ],
-        "operationId": "get/tests/{id}"
+        "operationId": "get/members/{id}"
       },
       "put": {
         "responses": {
@@ -14218,7 +14233,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TestResponse"
+                  "$ref": "#/components/schemas/MemberResponse"
                 }
               }
             }
@@ -14275,7 +14290,7 @@
           }
         },
         "tags": [
-          "Test"
+          "Member"
         ],
         "parameters": [
           {
@@ -14289,13 +14304,13 @@
             }
           }
         ],
-        "operationId": "put/tests/{id}",
+        "operationId": "put/members/{id}",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestRequest"
+                "$ref": "#/components/schemas/MemberRequest"
               }
             }
           }
@@ -14366,7 +14381,7 @@
           }
         },
         "tags": [
-          "Test"
+          "Member"
         ],
         "parameters": [
           {
@@ -14380,7 +14395,7 @@
             }
           }
         ],
-        "operationId": "delete/tests/{id}"
+        "operationId": "delete/members/{id}"
       }
     },
     "/upload/files": {

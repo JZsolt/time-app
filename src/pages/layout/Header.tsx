@@ -12,7 +12,7 @@ const Header = () => {
     { label: "Pricing", link: "" },
     { label: "Blog", link: "" },
     { label: "Home", link: "" },
-    { label: "Protected", link: "protected" },
+    { label: "Add members", link: "add-members" },
   ];
   const settings = ["Profile", "Account", "Dashboard"];
 

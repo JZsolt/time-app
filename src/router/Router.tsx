@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import AuthForms from "../pages/auth/AuthForms";
 import Home from "../pages/Home";
-import ProtectedPage from "../pages/ProtectedPage";
 import { GuardedRoute } from "./GuardedRoute";
+import AddMembers from "../pages/AddMembers";
 
 const Router = () => {
   return (
@@ -16,10 +16,10 @@ const Router = () => {
         element={<AuthForms />}
       />
       <Route
-        path="/protected"
+        path="/add-members"
         element={
           <GuardedRoute>
-            <ProtectedPage />
+            <AddMembers />
           </GuardedRoute>
         }
       />

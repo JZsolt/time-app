@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from "@mui/material";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { axiosHttp } from "../../services/instance";
+import axiosHttp from "../../services/instance";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";

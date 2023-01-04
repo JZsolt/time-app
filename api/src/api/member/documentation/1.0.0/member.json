@@ -1,5 +1,5 @@
 {
-  "/tests": {
+  "/members": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestListResponse"
+                "$ref": "#/components/schemas/MemberListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "Test"
+        "Member"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/tests"
+      "operationId": "get/members"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestResponse"
+                "$ref": "#/components/schemas/MemberResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "Test"
+        "Member"
       ],
       "parameters": [],
-      "operationId": "post/tests",
+      "operationId": "post/members",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/TestRequest"
+              "$ref": "#/components/schemas/MemberRequest"
             }
           }
         }
       }
     }
   },
-  "/tests/{id}": {
+  "/members/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestResponse"
+                "$ref": "#/components/schemas/MemberResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "Test"
+        "Member"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/tests/{id}"
+      "operationId": "get/members/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TestResponse"
+                "$ref": "#/components/schemas/MemberResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "Test"
+        "Member"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/tests/{id}",
+      "operationId": "put/members/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/TestRequest"
+              "$ref": "#/components/schemas/MemberRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "Test"
+        "Member"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/tests/{id}"
+      "operationId": "delete/members/{id}"
     }
   }
 }

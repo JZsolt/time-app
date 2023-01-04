@@ -1,11 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { GuardedRoute } from "../router/GuardedRoute";
+import ListMembers from "./ListMembers";
 
 const Home = () => {
   return (
-    <div>
-      home asd
-      <NavLink to="login">Login</NavLink>
-    </div>
+    <>
+      <GuardedRoute>
+        <ListMembers />
+      </GuardedRoute>
+    </>
   );
 };
 

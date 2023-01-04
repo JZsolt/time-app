@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
-import { axiosHttp } from "../../services/instance";
+import axiosHttp from "../../services/instance";
 import { toast } from "react-hot-toast";
 
 type Inputs = {
