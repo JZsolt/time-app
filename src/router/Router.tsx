@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthForms from "../pages/auth/AuthForms";
 import Home from "../pages/Home";
 import { GuardedRoute } from "./GuardedRoute";
-import AddMembers from "../pages/AddMembers";
+import AddMembers from "../pages/AddEditMembers";
 
 const Router = () => {
   return (
@@ -17,6 +17,14 @@ const Router = () => {
       />
       <Route
         path="/add-members"
+        element={
+          <GuardedRoute>
+            <AddMembers />
+          </GuardedRoute>
+        }
+      />
+      <Route
+        path="/edit-member"
         element={
           <GuardedRoute>
             <AddMembers />

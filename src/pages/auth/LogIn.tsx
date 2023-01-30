@@ -26,7 +26,7 @@ const LogIn = ({ changeTab }: { changeTab: Function }) => {
 
   const login = async (data: Inputs) => {
     await axiosHttp
-      .post("api/auth/local", data)
+      .post("auth/local", data)
       .then((res) => {
         console.log(res);
         let user: { username: string; email: string; jwt: string } = {

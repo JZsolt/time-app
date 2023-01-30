@@ -17,6 +17,36 @@
     },
     "lastName": {
       "type": "string"
+    },
+    "clmChairman": {
+      "type": "boolean"
+    },
+    "bReading": {
+      "type": "boolean"
+    },
+    "talk": {
+      "type": "boolean"
+    },
+    "spiritualGems": {
+      "type": "boolean"
+    },
+    "conversation": {
+      "type": "boolean"
+    },
+    "smallTalk": {
+      "type": "boolean"
+    },
+    "livingAsCh": {
+      "type": "boolean"
+    },
+    "bibleStudy": {
+      "type": "boolean"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "member"
     }
   }
 }

@@ -26,7 +26,7 @@ const SignUp = () => {
 
   const register = async (data: Inputs) =>
     await axiosHttp
-      .post("api/auth/local/register", data)
+      .post("auth/local/register", data)
       .then((res) => {
         console.log(res);
         let user: { username: string; email: string; jwt: string } = {
