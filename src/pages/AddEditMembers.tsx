@@ -45,7 +45,7 @@ const AddMembers = () => {
   const [searchParams] = useSearchParams();
   const memberId = searchParams.get("memberId");
 
-  const editMember = async (memberId: string) => {
+  const getMember = async (memberId: string) => {
     await axiosHttp
       .get(`/members/${memberId}`)
       .then((response) => {
@@ -85,17 +85,28 @@ const AddMembers = () => {
       });
   };
 
+  const editMember = async (data: object) => {
+    await axiosHttp.put("/members/" + memberId, data).then((response: any) => {
+      console.log(response);
+    });
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     const dataObj = {
       data: data,
     };
-    addMembers(dataObj);
+
+    if (memberId) {
+      editMember(dataObj);
+    } else {
+      addMembers(dataObj);
+    }
   };
 
   useEffect(() => {
     if (memberId) {
-      editMember(memberId);
+      getMember(memberId);
     }
   }, []);
 
