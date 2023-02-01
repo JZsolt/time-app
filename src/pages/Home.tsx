@@ -1,5 +1,5 @@
 import { GuardedRoute } from "../router/GuardedRoute";
-import ListMembers from "./ListMembers";
+import ListMembers from "./layout/List/ListMembers";
 
 const Home = () => {
   return (

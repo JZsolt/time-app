@@ -3,7 +3,7 @@ import { Box, Button, FormControlLabel, Switch, TextField } from "@mui/material"
 import axiosHttp from "../services/instance";
 import { profileLabel } from "../services/constants";
 import { toast } from "react-hot-toast";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 interface Inputs {
@@ -22,13 +22,13 @@ const profile = profileLabel;
 
 const AddMembers = () => {
   const [member, setMember] = useState<Inputs>();
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     setValue,
-    resetField,
   } = useForm<Inputs>({
     defaultValues: {
       clmChairman: member ? member?.clmChairman : false,
@@ -79,6 +79,7 @@ const AddMembers = () => {
             </b>
           </span>
         ));
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -86,9 +87,23 @@ const AddMembers = () => {
   };
 
   const editMember = async (data: object) => {
-    await axiosHttp.put("/members/" + memberId, data).then((response: any) => {
-      console.log(response);
-    });
+    await axiosHttp
+      .put("/members/" + memberId, data)
+      .then((response: any) => {
+        toast.success((t) => (
+          <span>
+            Sikeresen módosítottad:
+            <b>
+              {response.data.data.attributes.firstName} {response.data.data.attributes.lastName}
+            </b>
+          </span>
+        ));
+        navigate("/");
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {

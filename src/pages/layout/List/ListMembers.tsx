@@ -2,23 +2,10 @@ import { Container, Grid, Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { profileLabel } from "../services/constants";
-import axiosHttp from "../services/instance";
-
-interface IMember {
-  id: number;
-  attributes: {
-    firstName: string;
-    lastName: string;
-    talk: boolean;
-    spiritualGems: boolean;
-    bReading: boolean;
-    conversation: boolean;
-    smallTalk: boolean;
-    livingAsCh: boolean;
-    bibleStudy: boolean;
-  };
-}
+import { profileLabel } from "../../../services/constants";
+import axiosHttp from "../../../services/instance";
+import { IMember } from "../../../services/interfaces";
+import Item from "./Item";
 
 interface IMemberList {
   data: IMember[];
@@ -62,7 +49,7 @@ const ListMembers = () => {
               <Grid
                 key={item.id}
                 item
-                sx={{ paddingLeft: "5px !important", paddingRight: "5px !important", borderRight: "1px solid", width: "11.11%" }}
+                sx={{ padding: "5px !important", borderRight: "1px solid", width: "11.11%" }}
               >
                 <Typography
                   sx={{
@@ -74,36 +61,25 @@ const ListMembers = () => {
                     minHeight: "50px",
                     borderBottom: "1px solid",
                     textAlign: "center",
+                    marginBottom: "10px",
                   }}
                 >
                   {item.label}
                 </Typography>
                 {memberList?.data?.map((member: IMember, index: number) => {
                   return item.id === "name" ? (
-                    <Tooltip
-                      key={member.id}
-                      arrow
-                      placement="right"
-                      title={
-                        <Typography sx={{ fontSize: "16px" }}>
-                          {member.attributes.firstName} {member.attributes.lastName}
-                        </Typography>
-                      }
-                    >
-                      <Link
-                        style={{ textDecoration: "none", color: "unset" }}
-                        to={`/edit-member?memberId=${member.id}`}
-                      >
-                        <Box sx={{ textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: "1", WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-                          {index + 1}. {member.attributes.firstName} {member.attributes.lastName}
-                        </Box>
-                      </Link>
-                    </Tooltip>
+                    <Item
+                      member={member}
+                      index={index}
+                      link={`/edit-member?memberId=${member.id}`}
+                      deleteBtn={true}
+                    />
                   ) : (
                     member.attributes[item.id as keyof boolean] && (
-                      <Box key={member.id}>
-                        {member.attributes.firstName} {member.attributes.lastName}
-                      </Box>
+                      <Item
+                        member={member}
+                        link={`/edit-member?memberId=${member.id}`}
+                      />
                     )
                   );
                 })}
