@@ -29,9 +29,12 @@ const AddMembers = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<Inputs>({
     defaultValues: {
-      clmChairman: member ? member?.clmChairman : false,
+      firstName: "",
+      lastName: "",
+      clmChairman: false,
       talk: false,
       spiritualGems: false,
       bReading: false,
@@ -60,7 +63,7 @@ const AddMembers = () => {
         setValue("smallTalk", response.data.data.attributes.smallTalk);
         setValue("livingAsCh", response.data.data.attributes.livingAsCh);
         setValue("bibleStudy", response.data.data.attributes.bibleStudy);
-        console.log(response.data.data.attributes);
+        // console.log(response.data.data.attributes);
       })
       .catch((error) => {
         console.log(error);
@@ -99,7 +102,7 @@ const AddMembers = () => {
           </span>
         ));
         navigate("/");
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -124,6 +127,13 @@ const AddMembers = () => {
       getMember(memberId);
     }
   }, []);
+
+  useEffect(() => {
+    // console.log(window.location.pathname);
+    if (window.location.pathname === "/add-members") {
+      reset();
+    }
+  }, [window.location.pathname]);
 
   return (
     <>
@@ -205,7 +215,7 @@ const AddMembers = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Add
+            {memberId ? "Edit" : "Add"}
           </Button>
         </Box>
       </Box>

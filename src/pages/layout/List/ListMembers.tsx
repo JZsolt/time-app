@@ -1,7 +1,5 @@
-import { Container, Grid, Tooltip, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { profileLabel } from "../../../services/constants";
 import axiosHttp from "../../../services/instance";
 import { IMember } from "../../../services/interfaces";
@@ -42,24 +40,25 @@ const ListMembers = () => {
         <Grid
           container
           spacing={2}
-          sx={{ flexWrap: "nowrap" }}
+          sx={{ flexWrap: "nowrap", border: "1px solid #e6e6e6", borderRadius: "8px", boxShadow: "1px 1px 5px #e6e6e6" }}
         >
-          {header.map((item) => {
+          {header.map((item, index) => {
             return (
               <Grid
                 key={item.id}
                 item
-                sx={{ padding: "5px !important", borderRight: "1px solid", width: "11.11%" }}
+                sx={{ padding: "5px !important", borderRight: `${header.length !== index + 1 ? "1px solid #e6e6e6" : ""}`, width: "11.11%" }}
               >
                 <Typography
                   sx={{
+                    color: "#818181",
                     fontWeight: "bold",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     WebkitLineClamp: "2",
                     WebkitBoxOrient: "vertical",
                     minHeight: "50px",
-                    borderBottom: "1px solid",
+                    borderBottom: "1px solid #e6e6e6",
                     textAlign: "center",
                     marginBottom: "10px",
                   }}
@@ -69,6 +68,7 @@ const ListMembers = () => {
                 {memberList?.data?.map((member: IMember, index: number) => {
                   return item.id === "name" ? (
                     <Item
+                      key={index}
                       member={member}
                       index={index}
                       link={`/edit-member?memberId=${member.id}`}
@@ -77,6 +77,7 @@ const ListMembers = () => {
                   ) : (
                     member.attributes[item.id as keyof boolean] && (
                       <Item
+                        key={index}
                         member={member}
                         link={`/edit-member?memberId=${member.id}`}
                       />

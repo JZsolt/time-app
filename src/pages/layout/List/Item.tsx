@@ -1,8 +1,10 @@
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Modal, Tooltip, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IMember } from "../../../services/interfaces";
 import ClearIcon from "@mui/icons-material/Clear";
 import axiosHttp from "../../../services/instance";
+import { useState } from "react";
+import AlertModal from "../../../components/AlertModal";
 
 const boxhoverSX = {
   display: "flex",
@@ -13,11 +15,14 @@ const boxhoverSX = {
   svg: {
     height: "19px",
     display: "none",
+    transition: ".3s ease-out",
+    "&:hover": { transform: "rotate(180deg)" },
   },
   "&:hover": {
     background: "#d8d8d8",
     borderRadius: "4px",
     a: {
+      //width: "calc(100% - 24px)",
       div: {
         color: "#000",
       },
@@ -26,19 +31,27 @@ const boxhoverSX = {
   },
 };
 
-const deleteMember = async (id: number) => {
-  await axiosHttp
-    .delete(`/members/${id}`)
-    .then((response) => {
-      window.location.reload();
-      console.log(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
 const Item = ({ member, index, link, deleteBtn }: { member: IMember; index?: number; link: string; deleteBtn?: boolean }) => {
+  const [modalState, setModalState] = useState<boolean>(false);
+  const [deleteMemberId, setDeleteMemberId] = useState<number>();
+
+  const deleteMember = async (id: number) => {
+    await axiosHttp
+      .delete(`/members/${id}`)
+      .then((response) => {
+        window.location.reload();
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const openAlertModal = (memberId: number) => {
+    setModalState(true);
+    setDeleteMemberId(memberId);
+  };
+
   return (
     <>
       <Tooltip
@@ -62,12 +75,19 @@ const Item = ({ member, index, link, deleteBtn }: { member: IMember; index?: num
           </Link>
           {deleteBtn && (
             <ClearIcon
-              onClick={() => deleteMember(member.id)}
+              onClick={() => openAlertModal(member.id)}
               sx={{ color: "#f44336", cursor: "pointer" }}
             />
           )}
         </Box>
       </Tooltip>
+      <AlertModal
+        modalState={modalState}
+        closeModal={() => setModalState(false)}
+        handleAction={() => deleteMember(deleteMemberId!)}
+        title="Are you sure?"
+        description="Do you really want to delete this member? This process cannot be undone!"
+      />
     </>
   );
 };

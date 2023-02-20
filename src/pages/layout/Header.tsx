@@ -8,7 +8,10 @@ import { getCurentUser } from "../../services/AuthHelper";
 import Logo from "../../assets/Logo";
 
 const Header = () => {
-  const pages = [{ label: "Add members", link: "add-members" }];
+  const pages = [
+    { label: "Add members", link: "add-members" },
+    { label: "Generate table", link: "time-table" },
+  ];
   const settings = ["Profile", "Account", "Dashboard"];
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

@@ -3,6 +3,7 @@ import AuthForms from "../pages/auth/AuthForms";
 import Home from "../pages/Home";
 import { GuardedRoute } from "./GuardedRoute";
 import AddMembers from "../pages/AddEditMembers";
+import TimeTable from "../pages/layout/TimeTable/TimeTable";
 
 const Router = () => {
   return (
@@ -28,6 +29,14 @@ const Router = () => {
         element={
           <GuardedRoute>
             <AddMembers />
+          </GuardedRoute>
+        }
+      />
+      <Route
+        path="/time-table"
+        element={
+          <GuardedRoute>
+            <TimeTable />
           </GuardedRoute>
         }
       />

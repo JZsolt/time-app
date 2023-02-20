@@ -3,6 +3,7 @@ export interface IMember {
   attributes: {
     firstName: string;
     lastName: string;
+    clmChairman: boolean;
     talk: boolean;
     spiritualGems: boolean;
     bReading: boolean;
